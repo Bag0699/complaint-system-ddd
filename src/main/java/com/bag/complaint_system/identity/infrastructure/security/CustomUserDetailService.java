@@ -1,7 +1,7 @@
 package com.bag.complaint_system.identity.infrastructure.security;
 
-import com.bag.complaint_system.identity.infrastructure.adapters.output.persitence.entity.UserEntity;
-import com.bag.complaint_system.identity.infrastructure.adapters.output.persitence.repository.JpaUserRepository;
+import com.bag.complaint_system.identity.infrastructure.adapters.output.persistence.entity.UserEntity;
+import com.bag.complaint_system.identity.infrastructure.adapters.output.persistence.repository.JpaUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
