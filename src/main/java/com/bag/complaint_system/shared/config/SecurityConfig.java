@@ -45,9 +45,9 @@ public class SecurityConfig {
 
                     // Admin only endpoints
                     .requestMatchers(
-                        "/api/v1/admin/**", "/api/v1/users/admin", "/api/v1/analytics/**")
-                    .hasRole("ADMIN")
-                    .requestMatchers(
+                        "/api/v1/admin/**",
+                        "/api/v1/users/admin",
+                        "/api/v1/analytics/**",
                         "/api/v1/support-centers/create",
                         "/api/v1/support-centers/*/edit",
                         "/api/v1/support-centers/*/delete")
