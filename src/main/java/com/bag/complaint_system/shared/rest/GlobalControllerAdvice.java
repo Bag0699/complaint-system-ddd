@@ -1,6 +1,9 @@
 package com.bag.complaint_system.shared.rest;
 
+import com.bag.complaint_system.shared.exception.ComplaintNotFoundException;
+import com.bag.complaint_system.shared.exception.InvalidValueException;
 import com.bag.complaint_system.shared.exception.UserNotFoundException;
+import com.bag.complaint_system.shared.exception.VictimNotFoundException;
 import com.bag.complaint_system.shared.util.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -26,6 +29,40 @@ public class GlobalControllerAdvice {
         .code(USER_NOT_FOUND.getCode())
         .status(HttpStatus.NOT_FOUND)
         .message(USER_NOT_FOUND.getMessage())
+        .timestamp(LocalDateTime.now())
+        .build();
+  }
+
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  @ExceptionHandler(ComplaintNotFoundException.class)
+  public ErrorResponse handleComplaintNotFoundException() {
+    return ErrorResponse.builder()
+        .code(COMPLAINT_NOT_FOUND.getCode())
+        .status(HttpStatus.NOT_FOUND)
+        .message(COMPLAINT_NOT_FOUND.getMessage())
+        .timestamp(LocalDateTime.now())
+        .build();
+  }
+
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  @ExceptionHandler(VictimNotFoundException.class)
+  public ErrorResponse handleVictimNotFoundException() {
+    return ErrorResponse.builder()
+        .code(VICTIM_NOT_FOUND.getCode())
+        .status(HttpStatus.NOT_FOUND)
+        .message(VICTIM_NOT_FOUND.getMessage())
+        .timestamp(LocalDateTime.now())
+        .build();
+  }
+
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ExceptionHandler(InvalidValueException.class)
+  public ErrorResponse handleInvalidValueException() {
+
+    return ErrorResponse.builder()
+        .code(INVALID_COMPLAINT_STATUS.getCode())
+        .status(HttpStatus.BAD_REQUEST)
+        .message(INVALID_COMPLAINT_STATUS.getMessage())
         .timestamp(LocalDateTime.now())
         .build();
   }
