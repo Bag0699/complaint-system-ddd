@@ -1,12 +1,10 @@
 package com.bag.complaint_system.complaint.domain.entity;
 
 import com.bag.complaint_system.complaint.domain.valueobject.VictimRelationship;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Aggressor {
 
