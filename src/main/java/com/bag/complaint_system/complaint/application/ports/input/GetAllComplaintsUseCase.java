@@ -4,7 +4,7 @@ import com.bag.complaint_system.complaint.application.dto.response.ComplaintResp
 
 import java.util.List;
 
-public interface GetAllComplaintUseCase {
+public interface GetAllComplaintsUseCase {
 
     List<ComplaintResponse> execute(Long authId);
 }
