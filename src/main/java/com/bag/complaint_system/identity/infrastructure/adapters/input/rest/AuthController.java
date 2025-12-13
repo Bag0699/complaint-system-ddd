@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
@@ -46,7 +48,9 @@ public class AuthController {
       })
   public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterUserRequest request) {
     AuthResponse response = registerUserUseCase.execute(request);
-    return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
+    return ResponseEntity.created(URI.create("/api/v1/auth/register" + response.getId()))
+        .body(response);
   }
 
   @PostMapping("/login")

@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/users")
@@ -25,7 +27,9 @@ public class UserController {
   @PostMapping("/admin")
   public ResponseEntity<AuthResponse> createAdmin(@Valid @RequestBody RegisterUserRequest request) {
     AuthResponse response = createAdminUseCase.execute(request);
-    return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
+    return ResponseEntity.created(URI.create("/api/v1/users/admin" + response.getId()))
+        .body(response);
   }
 
   @GetMapping("/profile")
