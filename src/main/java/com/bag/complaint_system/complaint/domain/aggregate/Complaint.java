@@ -4,8 +4,7 @@ import com.bag.complaint_system.complaint.domain.entity.Aggressor;
 import com.bag.complaint_system.complaint.domain.entity.Evidence;
 import com.bag.complaint_system.complaint.domain.valueobject.ComplaintStatus;
 import com.bag.complaint_system.complaint.domain.valueobject.ViolenceType;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,6 +14,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class Complaint {
   private static final int MAX_EVIDENCES = 10;
 

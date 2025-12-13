@@ -2,7 +2,7 @@ package com.bag.complaint_system.complaint.application.service;
 
 import com.bag.complaint_system.complaint.application.dto.response.ComplaintResponse;
 import com.bag.complaint_system.complaint.application.mapper.ComplaintMapper;
-import com.bag.complaint_system.complaint.application.ports.input.GetAllComplaintUseCase;
+import com.bag.complaint_system.complaint.application.ports.input.GetAllComplaintsUseCase;
 import com.bag.complaint_system.complaint.application.ports.output.ComplaintPersistencePort;
 import com.bag.complaint_system.complaint.domain.aggregate.Complaint;
 import com.bag.complaint_system.identity.application.ports.output.UserPersistencePort;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class GetAllComplaintService implements GetAllComplaintUseCase {
+public class GetAllComplaintsService implements GetAllComplaintsUseCase {
 
   private final ComplaintPersistencePort complaintPersistencePort;
   private final UserPersistencePort userPersistencePort;

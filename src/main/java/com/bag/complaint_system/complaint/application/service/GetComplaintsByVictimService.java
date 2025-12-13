@@ -2,7 +2,6 @@ package com.bag.complaint_system.complaint.application.service;
 
 import com.bag.complaint_system.complaint.application.dto.response.ComplaintResponse;
 import com.bag.complaint_system.complaint.application.mapper.ComplaintMapper;
-import com.bag.complaint_system.complaint.application.ports.input.GetAllComplaintUseCase;
 import com.bag.complaint_system.complaint.application.ports.input.GetComplaintsByVictimUseCase;
 import com.bag.complaint_system.complaint.application.ports.output.ComplaintPersistencePort;
 import com.bag.complaint_system.complaint.domain.aggregate.Complaint;
@@ -14,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

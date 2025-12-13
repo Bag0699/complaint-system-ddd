@@ -30,7 +30,7 @@ public class CreateComplaintService implements CreateComplaintUseCase {
   public ComplaintDetailResponse execute(Long victimId, CreateComplaintRequest request) {
     User victim = userPersistencePort.findById(victimId).orElseThrow(UserNotFoundException::new);
 
-    if (!victim.isAdmin()) {
+    if (!victim.isVictim()) {
       throw new RoleAccessDeniedException("Only victims can create complaints");
     }
 
