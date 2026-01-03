@@ -63,6 +63,35 @@ public class GlobalControllerAdvice {
         .build();
   }
 
+  @ResponseStatus(HttpStatus.UNAUTHORIZED) // 401 Unauthorized
+  @ExceptionHandler(SecurityException.class)
+  public ErrorResponse handleSecurityException(SecurityException exception) {
+
+    String detailMessage = exception.getMessage();
+
+    return ErrorResponse.builder()
+        .code(UNAUTHENTICATED.getCode())
+        .status(HttpStatus.UNAUTHORIZED)
+        .message(UNAUTHENTICATED.getMessage())
+        .detailMessage(Collections.singletonList(detailMessage))
+        .timestamp(LocalDateTime.now())
+        .build();
+  }
+
+  @ResponseStatus(HttpStatus.FORBIDDEN)
+  @ExceptionHandler(RoleAccessDeniedException.class)
+  public ErrorResponse handleRoleAccessDeniedException(RoleAccessDeniedException exception) {
+    String message = exception.getMessage();
+
+    return ErrorResponse.builder()
+        .code(INSUFFICIENT_ADMIN_ROLE.getCode())
+        .status(HttpStatus.FORBIDDEN)
+        .message(message)
+        .detailMessage(Collections.emptyList())
+        .timestamp(LocalDateTime.now())
+        .build();
+  }
+
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler(InvalidValueException.class)
   public ErrorResponse handleInvalidValueException() {

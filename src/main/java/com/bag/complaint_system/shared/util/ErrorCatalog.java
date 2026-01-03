@@ -31,6 +31,7 @@ public enum ErrorCatalog {
   UNAUTHENTICATED("ERR_AUTH_001", "User is not authenticated"),
   AUTH_FAILED("ERR_AUTH_002", "Invalid credentials"),
   INSUFFICIENT_ROLE("ERR_AUTH_003", "The user is not a victim required for this action"),
+  INSUFFICIENT_ADMIN_ROLE("ERR_AUTH_004", "The user is not an admin required for this action"),
   INSUFFICIENT_ACCESS_TO_RESOURCE("ERR_AUTH_006", "You can only view your own complaints"),
 
   GENERIC_ERROR("ERR_GEN_001", "Un error inesperado ocurrió.");
