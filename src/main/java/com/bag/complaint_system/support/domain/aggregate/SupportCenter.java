@@ -20,11 +20,9 @@ public class SupportCenter {
   private Phone phone;
   private Email email;
   private Schedule schedule;
-  private boolean isActive;
+  private Boolean isActive;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
-
-  private SupportCenter() {}
 
   public static SupportCenter create(
       String name, Address address, Phone phone, Email email, Schedule schedule) {
