@@ -1,9 +1,6 @@
 package com.bag.complaint_system.shared.rest;
 
-import com.bag.complaint_system.shared.exception.ComplaintNotFoundException;
-import com.bag.complaint_system.shared.exception.InvalidValueException;
-import com.bag.complaint_system.shared.exception.UserNotFoundException;
-import com.bag.complaint_system.shared.exception.VictimNotFoundException;
+import com.bag.complaint_system.shared.exception.*;
 import com.bag.complaint_system.shared.util.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -55,6 +52,17 @@ public class GlobalControllerAdvice {
         .build();
   }
 
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  @ExceptionHandler(SupportCenterNotFoundException.class)
+  public ErrorResponse handleSupportCenterNotFoundException() {
+    return ErrorResponse.builder()
+        .code(SUPPORT_CENTER_NOT_FOUND.getCode())
+        .status(HttpStatus.NOT_FOUND)
+        .message(SUPPORT_CENTER_NOT_FOUND.getMessage())
+        .timestamp(LocalDateTime.now())
+        .build();
+  }
+
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler(InvalidValueException.class)
   public ErrorResponse handleInvalidValueException() {
@@ -63,6 +71,18 @@ public class GlobalControllerAdvice {
         .code(INVALID_COMPLAINT_STATUS.getCode())
         .status(HttpStatus.BAD_REQUEST)
         .message(INVALID_COMPLAINT_STATUS.getMessage())
+        .timestamp(LocalDateTime.now())
+        .build();
+  }
+
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ExceptionHandler(InvalidDistrictException.class)
+  public ErrorResponse handleInvalidDistrictException() {
+
+    return ErrorResponse.builder()
+        .code(INVALID_SUPPORT_CENTER_DISTRICT.getCode())
+        .status(HttpStatus.BAD_REQUEST)
+        .message(INVALID_SUPPORT_CENTER_DISTRICT.getMessage())
         .timestamp(LocalDateTime.now())
         .build();
   }
