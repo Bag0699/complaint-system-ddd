@@ -1,4 +1,4 @@
-package com.bag.complaint_system.complaint.infrastructure.adapters.output.persistence;
+package com.bag.complaint_system.complaint.infrastructure.adapters;
 
 import com.bag.complaint_system.complaint.application.ports.output.ComplaintPersistencePort;
 import com.bag.complaint_system.complaint.domain.aggregate.Complaint;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -38,14 +37,14 @@ public class ComplaintRepositoryAdapter implements ComplaintPersistencePort {
   public List<Complaint> findByVictimId(Long victimId) {
     return jpaComplaintRepository.findByVictimId(victimId).stream()
         .map(complaintMapper::toComplaint)
-        .collect(Collectors.toList());
+        .toList();
   }
 
   @Override
   public List<Complaint> findAll() {
     return jpaComplaintRepository.findAll().stream()
         .map(complaintMapper::toComplaint)
-        .collect(Collectors.toList());
+        .toList();
   }
 
   @Override
@@ -53,7 +52,7 @@ public class ComplaintRepositoryAdapter implements ComplaintPersistencePort {
     StatusEntity statusEntity = StatusEntity.valueOf(status);
     return jpaComplaintRepository.findAllByStatus(statusEntity).stream()
         .map(complaintMapper::toComplaint)
-        .collect(Collectors.toList());
+        .toList();
   }
 
   @Override
@@ -61,14 +60,14 @@ public class ComplaintRepositoryAdapter implements ComplaintPersistencePort {
     ViolenceTypeEntity violenceTypeEntity = ViolenceTypeEntity.valueOf(violenceType);
     return jpaComplaintRepository.findAllByViolenceType(violenceTypeEntity).stream()
         .map(complaintMapper::toComplaint)
-        .collect(Collectors.toList());
+        .toList();
   }
 
   @Override
   public List<Complaint> findAllByDateRange(LocalDateTime startDate, LocalDateTime endDate) {
     return jpaComplaintRepository.findByDateRange(startDate, endDate).stream()
         .map(complaintMapper::toComplaint)
-        .collect(Collectors.toList());
+        .toList();
   }
 
   @Override
