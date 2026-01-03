@@ -1,4 +1,4 @@
-package com.bag.complaint_system.identity.infrastructure.adapters.output.persistence.mapper;
+package com.bag.complaint_system.identity.infrastructure.adapters.output.mapper;
 
 import com.bag.complaint_system.identity.domain.model.aggregate.User;
 import com.bag.complaint_system.identity.domain.model.valueobject.Email;
