@@ -1,5 +1,10 @@
 package com.bag.complaint_system.utils;
 
+import com.bag.complaint_system.complaint.application.dto.request.CreateComplaintRequest;
+import com.bag.complaint_system.complaint.domain.aggregate.Complaint;
+import com.bag.complaint_system.complaint.domain.entity.Aggressor;
+import com.bag.complaint_system.complaint.domain.valueobject.VictimRelationship;
+import com.bag.complaint_system.complaint.domain.valueobject.ViolenceType;
 import com.bag.complaint_system.identity.application.dto.request.RegisterUserRequest;
 import com.bag.complaint_system.identity.application.dto.response.AuthResponse;
 import com.bag.complaint_system.identity.domain.model.aggregate.User;
@@ -11,6 +16,7 @@ import com.bag.complaint_system.identity.infrastructure.security.CustomUserDetai
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -95,5 +101,30 @@ public class TestUtils {
         true,
         LocalDateTime.now(),
         LocalDateTime.now());
+  }
+
+  public static CreateComplaintRequest buildCreateComplaintRequestMock() {
+    return new CreateComplaintRequest(
+        "Descripción del incidente",
+        "PHYSICAL",
+        LocalDate.now(),
+        "Locación del incidente",
+        "Pedro Sanchez",
+        "PARTNER",
+        "Detalles adicionales");
+  }
+
+  public static Aggressor buildAggressorMock() {
+    return Aggressor.create("Pedro Sanchez", VictimRelationship.PARTNER, "Detalles adicionales");
+  }
+
+  public static Complaint buildComplaintMock(Long victimId) {
+    return Complaint.create(
+        victimId,
+        "Descripción del incidente",
+        ViolenceType.PHYSICAL,
+        LocalDate.now(),
+        "Locación del incidente",
+        buildAggressorMock());
   }
 }
