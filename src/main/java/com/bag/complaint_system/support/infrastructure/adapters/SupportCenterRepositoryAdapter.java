@@ -1,10 +1,10 @@
-package com.bag.complaint_system.support.infrastructure.adapters.output.persistence;
+package com.bag.complaint_system.support.infrastructure.adapters;
 
 import com.bag.complaint_system.support.application.ports.output.SupportPersistencePort;
 import com.bag.complaint_system.support.domain.aggregate.SupportCenter;
 import com.bag.complaint_system.support.domain.valueobject.District;
 import com.bag.complaint_system.support.infrastructure.adapters.output.persistence.entity.SupportCenterEntity;
-import com.bag.complaint_system.support.infrastructure.adapters.output.persistence.mapper.SupportCenterPersistenceMapper;
+import com.bag.complaint_system.support.infrastructure.adapters.output.mapper.SupportCenterPersistenceMapper;
 import com.bag.complaint_system.support.infrastructure.adapters.output.persistence.repository.JpaSupportCenterRepository;
 import com.bag.complaint_system.support.infrastructure.adapters.output.persistence.utils.DistrictEntity;
 import lombok.RequiredArgsConstructor;

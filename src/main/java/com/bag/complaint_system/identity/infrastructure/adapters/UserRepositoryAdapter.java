@@ -4,7 +4,7 @@ import com.bag.complaint_system.identity.application.ports.output.UserPersistenc
 import com.bag.complaint_system.identity.domain.model.aggregate.User;
 import com.bag.complaint_system.identity.domain.model.valueobject.Email;
 import com.bag.complaint_system.identity.infrastructure.adapters.output.persistence.entity.UserEntity;
-import com.bag.complaint_system.identity.infrastructure.adapters.output.persistence.mapper.UserPersistenceMapper;
+import com.bag.complaint_system.identity.infrastructure.adapters.output.mapper.UserPersistenceMapper;
 import com.bag.complaint_system.identity.infrastructure.adapters.output.persistence.repository.JpaUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

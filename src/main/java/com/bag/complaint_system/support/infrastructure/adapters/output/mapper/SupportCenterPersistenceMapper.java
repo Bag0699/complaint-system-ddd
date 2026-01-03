@@ -1,4 +1,4 @@
-package com.bag.complaint_system.support.infrastructure.adapters.output.persistence.mapper;
+package com.bag.complaint_system.support.infrastructure.adapters.output.mapper;
 
 import com.bag.complaint_system.identity.domain.model.valueobject.Email;
 import com.bag.complaint_system.identity.domain.model.valueobject.Phone;
@@ -35,9 +35,9 @@ public interface SupportCenterPersistenceMapper {
       source = "supportCenterEntity",
       qualifiedByName = "getScheduleValueEntity")
   @Mapping(
-          target = "address",
-          source = "supportCenterEntity",
-          qualifiedByName = "getAddressValueEntity")
+      target = "address",
+      source = "supportCenterEntity",
+      qualifiedByName = "getAddressValueEntity")
   SupportCenter toSupportCenter(SupportCenterEntity supportCenterEntity);
 
   List<SupportCenter> toSupportCenterList(List<SupportCenterEntity> supportCenterEntities);
