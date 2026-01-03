@@ -16,7 +16,7 @@ public interface SupportCenterMapper {
   @Mapping(target = "phone", expression = "java(center.getPhone().getValue())")
   @Mapping(target = "email", expression = "java(center.getEmail().getValue())")
   @Mapping(target = "schedule", expression = "java(center.getSchedule().getValue())")
-  @Mapping(target = "isActive", expression = "java(center.isActive())")
+//  @Mapping(target = "isActive", expression = "java(center.isActive())")
   SupportCenterResponse toResponse(SupportCenter center);
 
   List<SupportCenterResponse> toResponseList(List<SupportCenter> centers);
