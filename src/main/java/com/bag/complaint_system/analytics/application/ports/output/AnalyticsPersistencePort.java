@@ -16,8 +16,6 @@ public interface AnalyticsPersistencePort {
 
   Map<String, Long> countComplaintsByStatus(DateRange dateRange);
 
-  Map<String, Long> countComplaintsByDistrict();
-
   Long countTotalComplaints();
 
   Long countComplaintsInDateRange(DateRange dateRange);
