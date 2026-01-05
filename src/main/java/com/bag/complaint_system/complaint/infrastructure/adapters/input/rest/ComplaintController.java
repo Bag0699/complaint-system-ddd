@@ -7,6 +7,8 @@ import com.bag.complaint_system.complaint.application.dto.response.ComplaintResp
 
 import com.bag.complaint_system.complaint.application.ports.input.*;
 import com.bag.complaint_system.shared.config.SecurityContextHelper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +21,9 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/complaints")
+@Tag(
+    name = "Complaints",
+    description = "Operations related to complaint management for victims and administrators.")
 public class ComplaintController {
 
   private final CreateComplaintUseCase createComplaintUseCase;
@@ -31,6 +36,9 @@ public class ComplaintController {
 
   // Para crear una denuncia - solo víctima
   @PostMapping()
+  @Operation(
+      summary = "Create a new complaint",
+      description = "Allows an authenticated victim to register a new complaint in the system.")
   public ResponseEntity<ComplaintDetailResponse> createComplaint(
       @Valid @RequestBody CreateComplaintRequest request) {
 
@@ -43,6 +51,10 @@ public class ComplaintController {
 
   // Para obtener todas las denuncias - solo víctima
   @GetMapping("/my-complaints")
+  @Operation(
+      summary = "Get personal complaints",
+      description =
+          "Retrieves a list of all complaints filed by the currently authenticated victim.")
   public List<ComplaintResponse> getMyComplaints() {
     Long victimId = securityContextHelper.getAuthenticatedUserId();
     return getComplaintsByVictimUseCase.execute(victimId);
@@ -50,6 +62,9 @@ public class ComplaintController {
 
   // Para obtener todas las denuncias - solo admin
   @GetMapping
+  @Operation(
+      summary = "Get all complaints",
+      description = "Administrator access only. Retrieves all complaints registered in the system.")
   public List<ComplaintResponse> getAllComplaints() {
     Long authenticatedUserId = securityContextHelper.getAuthenticatedUserId();
     return getAllComplaintsUseCase.execute(authenticatedUserId);
@@ -57,6 +72,9 @@ public class ComplaintController {
 
   // Para obtener detalles de una denuncia por ID
   @GetMapping("/{id}")
+  @Operation(
+      summary = "Get complaint details",
+      description = "Retrieves detailed information of a specific complaint by its unique ID.")
   public ComplaintDetailResponse getComplaintDetail(@PathVariable Long id) {
     Long victimId = securityContextHelper.getAuthenticatedUserId();
     return getComplaintDetailUseCase.execute(id, victimId);
@@ -64,6 +82,9 @@ public class ComplaintController {
 
   // Para actualizar el estado de una denuncia - solo admin
   @PatchMapping("/{id}/status")
+  @Operation(
+      summary = "Update complaint status",
+      description = "Allows an administrator to update the status of a specific complaint.")
   public ComplaintDetailResponse updateComplaintStatus(
       @PathVariable Long id, @Valid @RequestBody UpdateComplaintStatusRequest request) {
     Long authenticatedUserId = securityContextHelper.getAuthenticatedUserId();
