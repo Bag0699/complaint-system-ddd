@@ -7,9 +7,7 @@ import com.bag.complaint_system.identity.application.ports.input.LoginUseCase;
 import com.bag.complaint_system.identity.application.ports.input.RegisterUserUseCase;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,6 +22,7 @@ import java.net.URI;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
+@Tag(name = "Authentication", description = "User registration and login operations")
 public class AuthController {
 
   private final RegisterUserUseCase registerUserUseCase;
@@ -32,20 +31,7 @@ public class AuthController {
   @PostMapping("/register")
   @Operation(
       summary = "Register a new user",
-      description = "Register a new user and return a token",
-      requestBody =
-          @io.swagger.v3.oas.annotations.parameters.RequestBody(
-              description = "Register request with full name, email, password and phone",
-              content =
-                  @Content(
-                      mediaType = "application/json",
-                      schema = @Schema(implementation = RegisterUserRequest.class))),
-      responses = {
-        @ApiResponse(
-            responseCode = "201",
-            description = "User registered and token successfully generated",
-            content = @Content(schema = @Schema(implementation = AuthResponse.class)))
-      })
+      description = "Register a new user and return a token")
   public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterUserRequest request) {
     AuthResponse response = registerUserUseCase.execute(request);
 
@@ -57,19 +43,7 @@ public class AuthController {
   @Operation(
       summary = "Login",
       description =
-          "Authenticate the user with credentials and return a JWT token for future access.",
-      requestBody =
-          @io.swagger.v3.oas.annotations.parameters.RequestBody(
-              content =
-                  @Content(
-                      mediaType = "application/json",
-                      schema = @Schema(implementation = LoginRequest.class))),
-      responses = {
-        @ApiResponse(
-            responseCode = "200",
-            description = "Login successful, token returned.",
-            content = @Content(schema = @Schema(implementation = AuthResponse.class)))
-      })
+          "Authenticate the user with credentials and return a JWT token for future access.")
   public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
     AuthResponse response = loginUserUseCase.execute(request);
     return ResponseEntity.status(HttpStatus.OK).body(response);
