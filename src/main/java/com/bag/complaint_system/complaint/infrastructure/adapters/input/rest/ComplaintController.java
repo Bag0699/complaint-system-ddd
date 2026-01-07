@@ -5,6 +5,7 @@ import com.bag.complaint_system.complaint.application.dto.request.UpdateComplain
 import com.bag.complaint_system.complaint.application.dto.response.ComplaintDetailResponse;
 import com.bag.complaint_system.complaint.application.dto.response.ComplaintResponse;
 
+import com.bag.complaint_system.complaint.application.dto.response.EvidenceResponse;
 import com.bag.complaint_system.complaint.application.ports.input.*;
 import com.bag.complaint_system.shared.config.SecurityContextHelper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,8 +13,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URI;
 import java.util.List;
@@ -31,6 +34,7 @@ public class ComplaintController {
   private final GetComplaintDetailUseCase getComplaintDetailUseCase;
   private final GetAllComplaintsUseCase getAllComplaintsUseCase;
   private final UpdateComplaintStatusUseCase updateComplaintStatusUseCase;
+  private final AddEvidenceUseCase addEvidenceUseCase;
 
   private final SecurityContextHelper securityContextHelper;
 
@@ -45,7 +49,7 @@ public class ComplaintController {
     Long victimId = securityContextHelper.getAuthenticatedUserId();
     ComplaintDetailResponse response = createComplaintUseCase.execute(victimId, request);
 
-    return ResponseEntity.created(URI.create("/api/v1/complaints" + response.getId()))
+    return ResponseEntity.created(URI.create("/api/v1/complaints/" + response.getId()))
         .body(response);
   }
 
@@ -89,5 +93,19 @@ public class ComplaintController {
       @PathVariable Long id, @Valid @RequestBody UpdateComplaintStatusRequest request) {
     Long authenticatedUserId = securityContextHelper.getAuthenticatedUserId();
     return updateComplaintStatusUseCase.execute(id, authenticatedUserId, request);
+  }
+
+  @Operation(
+      summary = "Adding evidence to a complaint",
+      description = "Upload a file as evidence for an existing complaint.")
+  @PostMapping(value = "/{id}/evidence", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+  public ResponseEntity<EvidenceResponse> addEvidence(
+      @PathVariable Long id, @RequestParam("file") MultipartFile file) {
+
+    Long authUserId = securityContextHelper.getAuthenticatedUserId();
+    EvidenceResponse response = addEvidenceUseCase.execute(id, authUserId, file);
+
+    return ResponseEntity.created(URI.create("/api/v1/complaints/" + response.getId()))
+        .body(response);
   }
 }
