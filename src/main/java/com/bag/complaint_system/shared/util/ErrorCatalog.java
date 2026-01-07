@@ -34,7 +34,7 @@ public enum ErrorCatalog {
   INSUFFICIENT_ADMIN_ROLE("ERR_AUTH_004", "The user is not an admin required for this action"),
   INSUFFICIENT_ACCESS_TO_RESOURCE("ERR_AUTH_006", "You can only view your own complaints"),
 
-  GENERIC_ERROR("ERR_GEN_001", "Un error inesperado ocurrió.");
+  GENERIC_ERROR("ERR_GEN_001", "An unexpected error occurred.");
 
   private final String code;
   private final String message;
