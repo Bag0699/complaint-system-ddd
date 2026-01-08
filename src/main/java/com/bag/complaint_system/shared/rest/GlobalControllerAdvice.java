@@ -117,6 +117,18 @@ public class GlobalControllerAdvice {
   }
 
   @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ExceptionHandler(UserAlreadyExistsException.class)
+  public ErrorResponse handleUserAlreadyExistsException() {
+
+    return ErrorResponse.builder()
+        .code(USER_EMAIL_ALREADY_EXISTS.getCode())
+        .status(HttpStatus.BAD_REQUEST)
+        .message(USER_EMAIL_ALREADY_EXISTS.getMessage())
+        .timestamp(LocalDateTime.now())
+        .build();
+  }
+
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ErrorResponse handleMethodArgumentNotValidException(
       MethodArgumentNotValidException exception) {

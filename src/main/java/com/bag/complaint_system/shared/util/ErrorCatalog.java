@@ -16,6 +16,7 @@ public enum ErrorCatalog {
 
   USER_NOT_FOUND("ERR_USR_001", "User not found"),
   INVALID_USER("ERR_USR_002", "User parameters is invalid"),
+  USER_EMAIL_ALREADY_EXISTS("ERR_USR_003", "User email already exists"),
 
   SUPPORT_CENTER_NOT_FOUND("ERR_SPC_001", "Support center not found"),
   INVALID_SUPPORT_CENTER("ERR_SPC_002", "Support center parameters is invalid"),
